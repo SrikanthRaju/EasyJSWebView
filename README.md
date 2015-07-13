@@ -1,6 +1,17 @@
 EasyJSWebView - much simpler JS X Obj-C interaction
 =============
 
+> This repository was forked from https://github.com/dukeland/EasyJSWebView
+
+> Since the original version breaks on redirects in the webview, I changed it to work after every page load (webViewDidFinishLoad).
+
+Because of this modification, if you try to call the bridge (e.g. MyJSTest.test() from the sample), without waiting for the page to load, it will NOT work.
+
+Try this instead:
+```js
+setTimeout(function() { MyJSTest.test() }, 1);
+```
+###Introduction
 You are using UIWebView in your iOS app and you want to do some communications between the Javascript inside the WebView and Objective-C. How would you do it?
 
 To run Javascript in Objective-C, you can use the **– stringByEvaluatingJavaScriptFromString:** method. To run Objective-C method, well it is a little bit tricky, you need to implement the **UIWebViewDelegate** and the **shouldStartLoadWithRequest** method.
@@ -9,7 +20,7 @@ Do you know how to do this in Android? You simply need to create a class and pas
 
 EasyJSWebView is a library that allows you to do the same in Objective-C. Download it and try. **I promise. It is much simpler to do the job!!!**
 
-You may find the sample project [here](https://github.com/dukeland/EasyJSWebViewSample).
+You may find the sample project [here](https://github.com/andiradulescu/EasyJSWebViewSample).
 
 ###Some code to demonstrate
 So basically what you need to do is create a class like this.
